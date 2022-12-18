@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float health = 50f;
+    public float health = 20f;
+    public int score = 20;
     public void GetDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            this.gameObject.GetComponent<Renderer>().material.color = Color.green;
-            // Destroy(this.gameObject);
+            //this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+            GameMangerr.instance.updateScore(score);
+             Destroy(this.gameObject);
             // Create a new cube primitive to set the color on
             //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
