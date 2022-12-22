@@ -240,6 +240,7 @@ namespace InfimaGames.LowPolyShooterPack
                     hit.rigidbody.AddForce(-hit.normal * impactForce);
                 }
                 Enemy enemy = hit.transform.GetComponent<Enemy>();
+             //   MeshCollider m = enemy.GetComponent<MeshCollider>();
                 if (enemy != null)
                 {
 

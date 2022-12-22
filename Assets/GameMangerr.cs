@@ -9,7 +9,7 @@ public class GameMangerr : MonoBehaviour
     // Start is called before the first frame update
     public static GameMangerr instance;
     public TextMeshProUGUI scoreText;
-    
+    public static int bearCount = 0;
     public int points = 0;
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class GameMangerr : MonoBehaviour
 
         points += score;
         scoreText.text = points.ToString();
+        bearCount += 1;
     }
 
    
