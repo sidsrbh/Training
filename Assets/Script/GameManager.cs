@@ -5,10 +5,17 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using InfimaGames.LowPolyShooterPack;
+using Photon;
+using Photon.Realtime;
+using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
-   
+
+    bool Connected;
+    public Button connect;
+    [SerializeField] TextMeshProUGUI MessagText;
+
     [SerializeField]
     Button quitButton;
 
@@ -27,7 +34,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      //  player = GetComponent<Transform>();
+        PhotonNetwork.ConnectUsingSettings();
+        //  player = GetComponent<Transform>();
         quitButton.onClick.AddListener(StopGame);
     }
 
