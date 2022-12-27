@@ -9222,7 +9222,7 @@ PrefabInstance:
     - target: {fileID: 6511931013433139441, guid: ae4cd5b1a0eeb9746930cb571a3bbdd2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6511931013758873064, guid: ae4cd5b1a0eeb9746930cb571a3bbdd2,
         type: 3}
@@ -11884,8 +11884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464022fc42a2aac45b22c45a243f6e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  animator: {fileID: 0}
 --- !u!114 &1211567974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11898,11 +11896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18ff9750eda9f3418d59387c210e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimLayerMask:
-    m_Bits: 2147483647
-  _blasterShotPrefab: {fileID: 1574146165373426971, guid: c638dfae3f3edf843b2614dae230a771,
-    type: 3}
-  _firePoint: {fileID: 856603199}
 --- !u!4 &1212629800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2807449429036539767, guid: f0c16f0ea935ea64297ca1d4d55d9746,
