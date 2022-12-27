@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     int health;
 
-    [SerializeField]
+    
     GameObject panel;
 
     [SerializeField]
@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClipWalking;
         audioSource.loop = true;
+        panel = GameObject.FindGameObjectWithTag("GameOverPanel");
     }
     // Update is called once per frame
     void Update()
@@ -88,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PlayerDeath()
     {
         yield return new WaitForSeconds(3);
+        panel = GameObject.FindWithTag("GameOverPanel");
+        
         panel.SetActive(true);
         transform.gameObject.SetActive(false);
     }

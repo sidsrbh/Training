@@ -16,6 +16,8 @@ TagManager:
   - Wood (Static)
   - Dirt (Static)
   - Wood
+  - Bullet
+  - GameOverPanel
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,6 @@
+using Photon.Pun;
+using Photon.Realtime;
+using Photon.Chat;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,66 +8,68 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class MultiPlayerManager : MonoBehaviour
+public class MultiPlayerManager : MonoBehaviourPunCallbacks
 {
-    //public string roomName;
-    //public Button Connect;
-    //bool Connected;
-    //[SerializeField] TextMeshProUGUI MessageText;
-    //public static UnityEvent JoinedRoom;
-    //// Start is called before the first frame update
-    //void Start()
-    //{
+    bool Connected;
+    public Button Connect;
+    [SerializeField] TextMeshProUGUI MessagText;
+    [SerializeField] GameObject playerPrefab;
 
-    //    PhotonNetwork.ConnectUsingSettings();
-    //    if (JoinedRoom == null)
-    //    {
-    //        JoinedRoom = new UnityEvent();
-    //    }
-    //    Connect.onClick.AddListener(SearchRoom);
-    //}
+    // Start is called before the first frame update
+    void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+        Connect.onClick.AddListener(SearchRoom);
+    }
 
-    //public override void OnConnectedToMaster()
-    //{
-    //    base.OnConnectedToMaster();
-    //    Debug.Log("I am connected");
-    //}
-    //private void SearchRoom()
-    //{
-    //    PhotonNetwork.JoinRoom("Room");
-    //    Debug.Log("Searching");
-    //}
-    //public override void OnJoinRoomFailed(short returnCode, string message)
-    //{
-    //    base.OnJoinRoomFailed(returnCode, message);
-    //    CreateRoom();
-    //}
-    //public override void OnJoinRandomFailed(short returnCode, string message)
-    //{
-    //    base.OnJoinRoomFailed(returnCode, message);
-    //    CreateRoom();
-    //}
+    // Update is called once per frame
+    void Update()
+    {
 
-    //private void CreateRoom()
-    //{
-    //    RoomOptions ro = new RoomOptions();
-    //    ro.MaxPlayers = 1;
-    //    PhotonNetwork.CreateRoom("Room", ro, TypedLobbyInfo.Default);
-    //}
+    }
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Connected");
+        Connected = true;
+    }
 
-    //public override void OnCreatedRoom()
-    //{
-    //    Connect.gameObject.SetActive(false);
-    //    MessageText.gameObject.SetActive(true);
-    //    MessageText.text = "Create Room Waiting for Players..";
-    //}
+    public void SearchRoom()
+    {
 
-    //public override void OnJoinedRoom()
-    //{
-    //    Connect.gameObject.SetActive(false);
-    //    MessageText.gameObject.SetActive(true);
-    //    MessageText.text = "joined Room waiting for Players.." + PhotonNetwork.CurrentRoom.Name;
+        PhotonNetwork.JoinRandomRoom();
+        Debug.Log("searching for ");
+    }
 
-    //    JoinedRoom.Invoke();
-    //}
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        CreateRoom();
+    }
+
+    public void CreateRoom()
+    {
+        RoomOptions ro = new RoomOptions();
+        ro.MaxPlayers = 2;
+        PhotonNetwork.CreateRoom("Room", ro, TypedLobbyInfo.Default);
+
+
+
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Connect.gameObject.SetActive(false);
+        MessagText.gameObject.SetActive(true);
+        MessagText.text = "Joined Room Waiting for Player";
+
+        int randomNumber = Random.Range(130, 150);
+        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Connect.gameObject.SetActive(false);
+        MessagText.gameObject.SetActive(true);
+        MessagText.text = "Joined Room Waiting for Player";
+    }
 }
