@@ -7,8 +7,9 @@ public class FinishLevel : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {       
-        GameManagerLevel.instance.win();
-        if (other.gameObject.name == "P_LPSP_FP_CH")
+        if(GameMangerr.points ==100)
+           GameManagerLevel.instance.win();
+        if (other.gameObject.tag == "Player")
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 

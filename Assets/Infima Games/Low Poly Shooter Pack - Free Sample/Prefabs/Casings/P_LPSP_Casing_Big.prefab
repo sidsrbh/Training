@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 54238244902362926}
   - component: {fileID: 114121961160874846}
   - component: {fileID: 82444821930212418}
+  - component: {fileID: 1574146165373426971}
   m_Layer: 9
   m_Name: P_LPSP_Casing_Big
   m_TagString: Bullet
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492315059354262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acff82b1c71481f48a9f9884f9f62d6b, type: 3}
   m_Name: 
@@ -138,7 +139,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492315059354262}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -227,3 +228,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1574146165373426971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492315059354262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad17b1248cac464c94d1a42d8fdef2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 15

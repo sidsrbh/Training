@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private Animator _animator;
 
     [SerializeField] float _attackRange = 1f;
-    [SerializeField] GameObject player;
+    GameObject player;
     public float within_range;
     public float speed;
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     {
         if(collision.transform.tag == "Bullet")
         {
-
+            GetDamage(10);
         }
     }
     public void GetDamage(float damage)
@@ -107,6 +107,8 @@ public class Enemy : MonoBehaviour
         //{
         //    Attack();
         //}
+
+        player =  GameObject.FindGameObjectWithTag("Player");
         float dist = Vector3.Distance(player.transform.position, transform.position);
         transform.LookAt(transform.position - player.transform.position);
         //check if it is within the range you set
@@ -134,7 +136,6 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         _animator.SetTrigger("Attack");
-      //  _navMeshAgent.enabled = false;
     }
 
     private void Die()
@@ -145,9 +146,8 @@ public class Enemy : MonoBehaviour
             GameMangerr.instance.updateScore(score);
            
         }
-            // _navMeshAgent.enabled = false;
-            _animator.SetTrigger("Died");
-      //  Died?.Invoke(this);
+           
+        _animator.SetTrigger("Died");
         Destroy(gameObject, 5f);
        
     }

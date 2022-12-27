@@ -10,7 +10,7 @@ public class GameMangerr : MonoBehaviour
     public static GameMangerr instance;
     public TextMeshProUGUI scoreText;
     public static int bearCount = 0;
-    public int points = 0;
+    public static int points = 0;
     private void Awake()
     {
         instance = this;
@@ -18,6 +18,7 @@ public class GameMangerr : MonoBehaviour
 
     private void Start()
     {
+        points = 0;
         scoreText.text = points.ToString();
     }
 
