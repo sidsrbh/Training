@@ -15,15 +15,19 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AimTowardMouse();
-        
-        if (transform.rotation.eulerAngles.z > 0 || transform.rotation.eulerAngles.x > 0 || transform.rotation.eulerAngles.z < 0 || transform.rotation.eulerAngles.x < 0)
+
+        if (GetComponent<PlayerMovement>().pv.IsMine)
         {
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
+            AimTowardMouse();
+
+            if (transform.rotation.eulerAngles.z > 0 || transform.rotation.eulerAngles.x > 0 || transform.rotation.eulerAngles.z < 0 || transform.rotation.eulerAngles.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Fire();
+            }
         }
     }
 
@@ -47,5 +51,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         BlasterShot shot = Instantiate(_blasterShotPrefab, _firePoint.position, transform.rotation);
         shot.Launch( transform.forward);
+
+        Destroy(shot.gameObject, 3);
     }
 }

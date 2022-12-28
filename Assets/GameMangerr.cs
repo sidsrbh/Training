@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class GameMangerr : MonoBehaviour
 {
@@ -26,8 +28,16 @@ public class GameMangerr : MonoBehaviour
     {
 
         points += score;
+        
         scoreText.text = points.ToString();
         bearCount += 1;
+
+        GameObject p =  GameObject.FindGameObjectWithTag("Player");
+       if( p.GetComponent<PlayerMovement>().pv.IsMine)
+        {
+            PhotonNetwork.LocalPlayer.AddScore(score);
+            
+        }
     }
 
    

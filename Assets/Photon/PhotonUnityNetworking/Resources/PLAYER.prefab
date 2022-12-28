@@ -4279,7 +4279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7012951611062217398
 Transform:
   m_ObjectHideFlags: 0
@@ -4459,8 +4459,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3.5
   health: 10
-  panel: {fileID: 1976962218931236327, guid: 088951c51038eda48ba0a48ada9386e5, type: 3}
+  panel: {fileID: 0}
   audioClipWalking: {fileID: 8300000, guid: 74abbbf1b1724e34b894191db38e10a0, type: 3}
+  pv: {fileID: 0}
 --- !u!114 &1329387913452601520
 MonoBehaviour:
   m_ObjectHideFlags: 0

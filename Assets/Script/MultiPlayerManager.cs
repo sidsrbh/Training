@@ -15,6 +15,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     [SerializeField] TextMeshProUGUI MessagText;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject gameoverPanel;
+    public GameObject cameraPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +96,13 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
         }
         GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
         player.GetComponent<PlayerMovement>().panel = gameoverPanel;
+        if(player.GetComponent<PhotonView>().IsMine)
+        {
+            GameObject go = Instantiate(cameraPrefab, player.transform);
+            go.transform.localPosition = new Vector3(0, 2, -1.6f);
+            go.transform.rotation = Quaternion.Euler(24.88f, 0, 0); 
+        }
+        player.name = "srs";
 
     }
 }
