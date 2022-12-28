@@ -62,15 +62,39 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
         MessagText.gameObject.SetActive(true);
        // MessagText.text = "Joined Room Waiting for Player";
 
-        int randomNumber = Random.Range(130, 150);
-        GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
-        player.GetComponent<PlayerMovement>().panel = gameoverPanel;
+       // int randomNumber = Random.Range(130, 150);
+     //   GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
+        
     }
 
     public override void OnJoinedRoom()
     {
         Connect.gameObject.SetActive(false);
         MessagText.gameObject.SetActive(true);
-     //   MessagText.text = "Joined Room Waiting for Player";
+        //   MessagText.text = "Joined Room Waiting for Player";
+        ExitGames.Client.Photon.Hashtable myhashtable = PhotonNetwork.CurrentRoom.CustomProperties;
+
+        int randomNumber = 0;
+        while (PhotonNetwork.CurrentRoom.CustomProperties["player" + PhotonNetwork.LocalPlayer.ActorNumber] == null)
+        {
+            randomNumber = Random.Range(130, 150);
+            bool found = false;
+            foreach (DictionaryEntry kvp in myhashtable)
+            {
+                if ((int)kvp.Value == randomNumber)
+                {
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                myhashtable = PhotonNetwork.CurrentRoom.CustomProperties;
+                myhashtable["player" + PhotonNetwork.LocalPlayer.ActorNumber] = randomNumber;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(myhashtable);
+            }
+        }
+        GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
+        player.GetComponent<PlayerMovement>().panel = gameoverPanel;
+
     }
 }
