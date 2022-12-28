@@ -14,7 +14,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     public Button Connect;
     [SerializeField] TextMeshProUGUI MessagText;
     [SerializeField] GameObject playerPrefab;
-
+    [SerializeField] GameObject gameoverPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,16 +60,17 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     {
         Connect.gameObject.SetActive(false);
         MessagText.gameObject.SetActive(true);
-        MessagText.text = "Joined Room Waiting for Player";
+       // MessagText.text = "Joined Room Waiting for Player";
 
         int randomNumber = Random.Range(130, 150);
-        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
+        GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
+        player.GetComponent<PlayerMovement>().panel = gameoverPanel;
     }
 
     public override void OnJoinedRoom()
     {
         Connect.gameObject.SetActive(false);
         MessagText.gameObject.SetActive(true);
-        MessagText.text = "Joined Room Waiting for Player";
+     //   MessagText.text = "Joined Room Waiting for Player";
     }
 }

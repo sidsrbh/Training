@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     int health;
 
     
-    GameObject panel;
+   public GameObject panel;
 
     [SerializeField]
     private AudioClip audioClipWalking;
@@ -89,7 +89,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PlayerDeath()
     {
         yield return new WaitForSeconds(3);
-        panel = GameObject.FindWithTag("GameOverPanel");
+      //  panel = GameObject.FindWithTag("GameOverPanel");
+        
         
         panel.SetActive(true);
         transform.gameObject.SetActive(false);
