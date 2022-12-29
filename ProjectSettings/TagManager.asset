@@ -18,6 +18,7 @@ TagManager:
   - Wood
   - Bullet
   - GameOverPanel
+  - Enemy
   layers:
   - Default
   - TransparentFX

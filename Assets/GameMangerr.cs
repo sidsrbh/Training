@@ -26,18 +26,10 @@ public class GameMangerr : MonoBehaviour
 
     public void updateScore(int score)
     {
-
         points += score;
         
         scoreText.text = points.ToString();
-        bearCount += 1;
-
-        GameObject p =  GameObject.FindGameObjectWithTag("Player");
-       if( p.GetComponent<PlayerMovement>().pv.IsMine)
-        {
-            PhotonNetwork.LocalPlayer.AddScore(score);
-            
-        }
+        bearCount += 1;           
     }
 
    

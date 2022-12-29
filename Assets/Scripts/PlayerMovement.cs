@@ -1,6 +1,8 @@
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
@@ -78,7 +80,11 @@ public class PlayerMovement : MonoBehaviour
                 if (!audioSource.isPlaying)
                     audioSource.Play();
             }
-            Debug.Log(PhotonNetwork.LocalPlayer.GetScore().ToString());
+
+            if (GameMangerr.bearCount >= 5)
+                GetResult();
+
+           // Debug.Log(PhotonNetwork.LocalPlayer.GetScore().ToString());
         }
         //if (photonView.IsMine)
         //{
@@ -92,6 +98,25 @@ public class PlayerMovement : MonoBehaviour
         // GetComponent<PhotonView>().RPC("UpdateScores", PhotonTargets);
     }
 
+    void GetResult()
+    {
+      //  resultDeclared = true;
+        List<(string, int)> playerList = new List<(string, int)>();
+        int i = 0;
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+
+            ExitGames.Client.Photon.Hashtable hashtable = p.CustomProperties;
+            playerList.Add(((string)hashtable["Score"], i));
+            i++;
+
+        }
+        playerList.Sort((t1, t2) =>
+        {
+            return t1.Item1.CompareTo(t2.Item1);
+        });
+        Debug.Log("Player Won" + playerList[0].Item1);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.GetComponent<Enemy>())
