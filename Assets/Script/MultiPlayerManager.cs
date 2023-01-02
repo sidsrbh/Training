@@ -15,6 +15,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     [SerializeField] TextMeshProUGUI MessagText;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject gameoverPanel;
+    [SerializeField] TMP_Text gameWinText;
     public GameObject cameraPrefab;
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     {
         RoomOptions ro = new RoomOptions();
         ro.MaxPlayers = 2;
+        
         PhotonNetwork.CreateRoom("Room", ro, TypedLobbyInfo.Default);
 
 
@@ -60,7 +62,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Connect.gameObject.SetActive(false);
-        MessagText.gameObject.SetActive(true);
+    //    MessagText.gameObject.SetActive(true);
        // MessagText.text = "Joined Room Waiting for Player";
 
        // int randomNumber = Random.Range(130, 150);
@@ -71,7 +73,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Connect.gameObject.SetActive(false);
-        MessagText.gameObject.SetActive(true);
+      //  MessagText.gameObject.SetActive(true);
         //   MessagText.text = "Joined Room Waiting for Player";
         ExitGames.Client.Photon.Hashtable myhashtable = PhotonNetwork.CurrentRoom.CustomProperties;
 
@@ -95,7 +97,10 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
             }
         }
         GameObject player =  PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomNumber, 0f, randomNumber), Quaternion.identity);
-        player.GetComponent<PlayerMovement>().panel = gameoverPanel;
+        
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerMovement>().gameoverPanel = gameoverPanel;
+        player.GetComponent<PlayerMovement>().gameWinText = gameWinText;
         if(player.GetComponent<PhotonView>().IsMine)
         {
             GameObject go = Instantiate(cameraPrefab, player.transform);
@@ -103,6 +108,7 @@ public class MultiPlayerManager : MonoBehaviourPunCallbacks
             go.transform.rotation = Quaternion.Euler(24.88f, 0, 0); 
         }
         player.name = "srs";
+        PhotonNetwork.LocalPlayer.NickName = "SRS";
 
     }
 }

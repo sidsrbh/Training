@@ -23,7 +23,7 @@ public class BlasterShot : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
-        if(collision.transform.tag == "Enemy")
+        if (collision.transform.tag == "Enemy")
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             //  if (PhotonNetwork.LocalPlayer != null)

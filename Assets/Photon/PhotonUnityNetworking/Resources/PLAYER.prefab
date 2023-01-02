@@ -4452,14 +4452,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7078126311166700537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bba103adc92462a4896789c794589ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3.5
   health: 10
-  panel: {fileID: 0}
+  gameoverPanel: {fileID: 0}
+  gameWinText: {fileID: 0}
   audioClipWalking: {fileID: 8300000, guid: 74abbbf1b1724e34b894191db38e10a0, type: 3}
   pv: {fileID: 0}
 --- !u!114 &1329387913452601520

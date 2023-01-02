@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
@@ -13,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     int health;
 
     
-   public GameObject panel;
+   public GameObject gameoverPanel;
+   public TMP_Text gameWinText;
 
     [SerializeField]
     private AudioClip audioClipWalking;
@@ -27,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClipWalking;
         audioSource.loop = true;
-        panel = GameObject.FindGameObjectWithTag("GameOverPanel");
+       // panel = GameObject.FindGameObjectWithTag("GameOverPanel");
         pv = GetComponent<PhotonView>();
         // photonView = GetComponent<PhotonView>();
         //  PhotonTargets = GetComponent<RpcTarget>();
@@ -81,10 +83,24 @@ public class PlayerMovement : MonoBehaviour
                     audioSource.Play();
             }
 
-            if (GameMangerr.bearCount >= 5)
+            //  if (GameMangerr.bearCount >= 2)
+           // GameObject p = GameObject.FindGameObjectWithTag("Player");
+            //  if (PhotonNetwork.LocalPlayer != null)
+         //   if (p.GetComponent<PlayerMovement>().pv.IsMine)
+         //   {
+                //PhotonNetwork.LocalPlayer.SetScore(GameMangerr.points);
+                //ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+                //hashtable["Score"] = PhotonNetwork.LocalPlayer.GetScore().ToString();
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+                //Player ss = PhotonNetwork.PlayerList[0];
+                //ExitGames.Client.Photon.Hashtable hashtabl = ss.CustomProperties;
+                //Debug.Log(hashtabl["Score"]);
+
+            //    }
+           // if (GameMangerr.bearCount >= 2)
                 GetResult();
 
-           // Debug.Log(PhotonNetwork.LocalPlayer.GetScore().ToString());
+            // Debug.Log(PhotonNetwork.LocalPlayer.GetScore().ToString());
         }
         //if (photonView.IsMine)
         //{
@@ -100,22 +116,34 @@ public class PlayerMovement : MonoBehaviour
 
     void GetResult()
     {
-      //  resultDeclared = true;
-        List<(string, int)> playerList = new List<(string, int)>();
+        
+        //  resultDeclared = true;
+        List<(string, string)> playerList = new List<(string, string)>();
+        
         int i = 0;
         foreach (Player p in PhotonNetwork.PlayerList)
         {
-
+            Player q =  PhotonNetwork.CurrentRoom.GetPlayer(p.ActorNumber);
             ExitGames.Client.Photon.Hashtable hashtable = p.CustomProperties;
-            playerList.Add(((string)hashtable["Score"], i));
+            
+            playerList.Add(((string)hashtable["Score"], p.NickName));
             i++;
 
+            Debug.Log(p.NickName);
         }
         playerList.Sort((t1, t2) =>
         {
             return t1.Item1.CompareTo(t2.Item1);
         });
-        Debug.Log("Player Won" + playerList[0].Item1);
+       // string score = playerList[0].Item1;
+       // int a = int.Parse(score)
+        if (int.Parse(playerList[playerList.Count -1].Item1) >= 40)
+        {
+            gameWinText.gameObject.SetActive(true);
+            gameWinText.text = "Player Won: " + playerList[playerList.Count -1].Item2;
+            Debug.Log("Player Won" + playerList[0].Item2);
+        }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -137,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
       //  panel = GameObject.FindWithTag("GameOverPanel");
         
         
-        panel.SetActive(true);
+        gameoverPanel.SetActive(true);
         transform.gameObject.SetActive(false);
     }
 }
