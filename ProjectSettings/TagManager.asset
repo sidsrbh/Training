@@ -19,6 +19,7 @@ TagManager:
   - Bullet
   - GameOverPanel
   - Enemy
+  - EnemyManager
   layers:
   - Default
   - TransparentFX

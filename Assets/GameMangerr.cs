@@ -32,5 +32,10 @@ public class GameMangerr : MonoBehaviour
         bearCount += 1;           
     }
 
+    public void StartScore()
+    {
+        points = 0;
+        scoreText.text = points.ToString();
+    }
    
 }

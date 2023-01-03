@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     public List<Transform> enemytransforms;
     [SerializeField] GameObject enemyPrefab;
+    public List<GameObject> enemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,11 @@ public class EnemyManager : MonoBehaviour
     }
     public void EnemyInstantiation()
     {
-     //   PhotonNetwork.Instantiate(enemyPrefab.name,new Vector3( enemytransforms[0].,0,), Quaternion.identity);
+        enemies = new List<GameObject>();
+        //   PhotonNetwork.Instantiate(enemyPrefab.name,new Vector3( enemytransforms[0].,0,), Quaternion.identity);
+        foreach (Transform enemyTransform in enemytransforms)
+        {
+           enemies.Add(Instantiate(enemyPrefab, enemyTransform.position, Quaternion.identity));
+        }
     }
 }
